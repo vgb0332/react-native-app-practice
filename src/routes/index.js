@@ -6,29 +6,30 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-import { StackActions , NavigationActions , createDrawerNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
+import { StackActions , NavigationActions , createSwitchNavigator, createDrawerNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import Home from '../screens/Home';
+import authStore from '../mobx/authStore';
 
-const RootStack = createBottomTabNavigator(
+const AppStack = createStackNavigator(
   {
     Home: Home,
   },
   {
     initialRouteName: 'Home',
-    tabBarOptions : {
-      activeTintColor: '#ffffff',
-      activeBackgroundColor: '#333',
-      style : {
-        height: 30,
-      },
-      labelStyle: {
-        fontSize: 15,
-        fontWeight: 'bold',
-      },
+    passProps: {
+      store: authStore,
     }
   }
-);
+)
 
+const RootStack = createSwitchNavigator(
+  {
+    App: AppStack,
+  },
+  {
+    initialRouteName: 'App',
+
+  }
+);
 
 export default RootStack;

@@ -6,11 +6,16 @@ import {
   Text,
   View
 } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { Provider } from "mobx-react";
+import authStore from './mobx/authStore';
 import RootStack from './routes';
 
 export default class App extends React.Component {
   render() {
-    return <RootStack />;
+    return (
+        <Provider store={authStore}>
+          <RootStack />
+        </Provider>
+    )
   }
 }
