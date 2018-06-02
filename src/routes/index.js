@@ -6,11 +6,28 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-import { StackActions , NavigationActions , createSwitchNavigator, createDrawerNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator, createMaterialTopTabNavigator, StackActions , NavigationActions , createSwitchNavigator, createDrawerNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import Home from '../screens/Home';
+import Insta from '../screens/Insta';
+import Insta2 from '../screens/Insta2';
 import authStore from '../mobx/authStore';
+import AuthLoading from '../screens/AuthLoading';
 
-const AppStack = createStackNavigator(
+
+const AppStack = createMaterialTopTabNavigator(
+  {
+    Insta: Insta,
+    Insta2: Insta2,
+  },
+  {
+    initialRouteName: 'Insta',
+    passProps: {
+      store: authStore,
+    }
+  }
+)
+
+const AuthStack = createStackNavigator(
   {
     Home: Home,
   },
@@ -24,10 +41,12 @@ const AppStack = createStackNavigator(
 
 const RootStack = createSwitchNavigator(
   {
+    AuthLoading: AuthLoading,
+    Auth: AuthStack,
     App: AppStack,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'AuthLoading',
 
   }
 );

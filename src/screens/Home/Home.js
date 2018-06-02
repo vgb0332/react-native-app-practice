@@ -20,10 +20,6 @@ export default class Home extends Component {
     header: null,
   };
 
-  componentDidMount() {
-    alert(authStore.isLoggedIn);
-  }
-
   constructor(props){
     super(props);
     this.state = {
@@ -58,7 +54,7 @@ export default class Home extends Component {
       alert('Login Successful!');
       authStore.setUser();
       alert(authStore.getUserStatus());
-      // this.props.navigation.navigate('Details');
+      this.props.navigation.navigate('Insta');
     }
   }
 
